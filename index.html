@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hor Chanpheng - Android Developer | Portfolio</title>
+    <meta name="description" content="Professional Android Developer specializing in mobile app development. View my portfolio, projects, and get in touch for collaboration opportunities.">
+    <meta name="keywords" content="Android Developer, Mobile App Development, Kotlin, Java, Firebase, Portfolio">
+    <meta name="author" content="Hor Chanpheng">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://horchanpheng.web.app/">
+    <meta property="og:title" content="Hor Chanpheng - Android Developer">
+    <meta property="og:description" content="Professional Android Developer specializing in mobile app development">
+    <meta property="og:image" content="https://horchanpheng.web.app/favicon.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://horchanpheng.web.app/">
+    <meta property="twitter:title" content="Hor Chanpheng - Android Developer">
+    <meta property="twitter:description" content="Professional Android Developer specializing in mobile app development">
+    <meta property="twitter:image" content="https://horchanpheng.web.app/favicon.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Hor Chanpheng</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link download-cv" onclick="downloadCV()">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="highlight">Hor Chanpheng</span>
+                    </h1>
+                    <h2 class="hero-subtitle">Android Developer</h2>
+                    <p class="hero-description">
+                        Passionate Android developer with expertise in creating innovative mobile applications 
+                        that deliver exceptional user experiences. Specializing in Kotlin, Java, and modern Android development practices.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            <img src="https://via.placeholder.com/300x300/4f46e5/ffffff?text=HC" alt="Hor Chanpheng" id="profile-img">
+                        </div>
+                        <div class="profile-info">
+                            <h3>Hor Chanpheng</h3>
+                            <p>Android Developer</p>
+                            <div class="social-links">
+                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <h3>Passionate Android Developer</h3>
+                    <p>
+                        I'm a dedicated Android developer with a passion for creating innovative mobile applications 
+                        that solve real-world problems. With expertise in modern Android development technologies, 
+                        I focus on building scalable, maintainable, and user-friendly applications.
+                    </p>
+                    <p>
+                        My journey in mobile development has led me to work on various projects ranging from 
+                        simple utility apps to complex enterprise solutions. I believe in continuous learning 
+                        and staying updated with the latest Android development trends and best practices.
+                    </p>
+                    <div class="stats">
+                        <div class="stat animate-on-scroll">
+                            <h4>3+</h4>
+                            <p>Years Experience</p>
+                        </div>
+                        <div class="stat animate-on-scroll">
+                            <h4>15+</h4>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat animate-on-scroll">
+                            <h4>5+</h4>
+                            <p>Happy Clients</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image animate-on-scroll">
+                    <div class="image-placeholder">
+                        <i class="fas fa-code"></i>
+                        <p>Your Photo Here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <p class="section-subtitle">Technologies I work with</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <h3>Mobile Development</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-android"></i>
+                            <span>Android Development</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-code"></i>
+                            <span>Kotlin</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Flutter</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>Tools & Frameworks</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-fire"></i>
+                            <span>Firebase</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>SQLite</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-cloud"></i>
+                            <span>REST APIs</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>Design & UI/UX</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Material Design</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-palette"></i>
+                            <span>UI/UX Design</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Responsive Design</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-adjust"></i>
+                            <span>Dark Mode</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Some of my recent work</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/6366f1/ffffff?text=Project+1" alt="Project 1">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce App</h3>
+                        <p>A modern e-commerce application built with Kotlin and Firebase, featuring real-time updates and secure payment integration.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Material Design</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/8b5cf6/ffffff?text=Project+2" alt="Project 2">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Weather App</h3>
+                        <p>Beautiful weather application with location-based forecasts, weather maps, and customizable widgets.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Location Services</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x250/06b6d4/ffffff?text=Project+3" alt="Project 3">
+                        <div class="project-overlay">
+                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Task Manager</h3>
+                        <p>Productivity app for task management with team collaboration features, notifications, and data synchronization.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Room Database</span>
+                            <span class="tech-tag">MVVM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's work together on your next project</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info animate-on-scroll">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always interested in new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+                    <div class="contact-methods">
+                        <div class="contact-method animate-on-scroll">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>hor.chanpheng@email.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-method animate-on-scroll">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+855 XX XXX XXX</p>
+                            </div>
+                        </div>
+                        <div class="contact-method animate-on-scroll">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Phnom Penh, Cambodia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form animate-on-scroll">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>&copy; 2024 Hor Chanpheng. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
