@@ -1,63 +1,55 @@
 // Mobile Navigation Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+$('.hamburger').on('click', function() {
+    $(this).toggleClass('active');
+    $('.nav-menu').toggleClass('active');
 });
 
 // Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
+$('.nav-link').on('click', function() {
+    $('.hamburger').removeClass('active');
+    $('.nav-menu').removeClass('active');
+});
 
 // Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+$('a[href^="#"]').on('click', function(e) {
+    e.preventDefault();
+    const target = $($(this).attr('href'));
+    if (target.length) {
+        $('html, body').animate({
+            scrollTop: target.offset().top
+        }, 800);
+    }
 });
 
 // Navbar background change on scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+$(window).on('scroll', function() {
+    const navbar = $('.navbar');
+    if ($(window).scrollTop() > 50) {
+        navbar.css({
+            'background': 'rgba(255, 255, 255, 0.98)',
+            'box-shadow': '0 2px 20px rgba(0, 0, 0, 0.1)'
+        });
     } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
+        navbar.css({
+            'background': 'rgba(255, 255, 255, 0.95)',
+            'box-shadow': 'none'
+        });
     }
 });
 
 // Active navigation link highlighting
-window.addEventListener('scroll', () => {
+$(window).on('scroll', function() {
     let current = '';
-    const sections = document.querySelectorAll('section');
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
+    $('section').each(function() {
+        const sectionTop = $(this).offset().top;
+        const sectionHeight = $(this).outerHeight();
+        if ($(window).scrollTop() >= (sectionTop - 200)) {
+            current = $(this).attr('id');
         }
     });
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
+    $('.nav-link').removeClass('active');
+    $(`.nav-link[href="#${current}"]`).addClass('active');
 });
 
 // Intersection Observer for animations
@@ -69,14 +61,14 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('animated');
+            $(entry.target).addClass('animated');
             
             // Add staggered animation for multiple elements
-            const siblings = entry.target.parentNode.querySelectorAll('.animate-on-scroll');
-            siblings.forEach((sibling, index) => {
-                if (sibling === entry.target) {
+            const siblings = $(entry.target).parent().find('.animate-on-scroll');
+            siblings.each(function(index) {
+                if ($(this)[0] === entry.target) {
                     setTimeout(() => {
-                        sibling.classList.add('animated');
+                        $(this).addClass('animated');
                     }, index * 200);
                 }
             });
@@ -85,40 +77,37 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    animateElements.forEach(el => observer.observe(el));
+$(document).ready(function() {
+    $('.animate-on-scroll').each(function() {
+        observer.observe(this);
+    });
 });
 
 // Contact form handling
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const subject = formData.get('subject');
-        const message = formData.get('message');
-        
-        // Simple validation
-        if (!name || !email || !subject || !message) {
-            showNotification('Please fill in all fields', 'error');
-            return;
-        }
-        
-        if (!isValidEmail(email)) {
-            showNotification('Please enter a valid email address', 'error');
-            return;
-        }
-        
-        // Simulate form submission
-        showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-        this.reset();
-    });
-}
+$('#contactForm').on('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const name = $('#name').val();
+    const email = $('#email').val();
+    const subject = $('#subject').val();
+    const message = $('#message').val();
+    
+    // Simple validation
+    if (!name || !email || !subject || !message) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    if (!isValidEmail(email)) {
+        showNotification('Please enter a valid email address', 'error');
+        return;
+    }
+    
+    // Simulate form submission
+    showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+    this.reset();
+});
 
 // Email validation
 function isValidEmail(email) {
@@ -129,100 +118,99 @@ function isValidEmail(email) {
 // Notification system
 function showNotification(message, type = 'info') {
     // Remove existing notifications
-    const existingNotifications = document.querySelectorAll('.notification');
-    existingNotifications.forEach(notification => notification.remove());
+    $('.notification').remove();
     
     // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <span class="notification-message">${message}</span>
-            <button class="notification-close">&times;</button>
+    const notification = $(`
+        <div class="notification notification-${type}">
+            <div class="notification-content">
+                <span class="notification-message">${message}</span>
+                <button class="notification-close">&times;</button>
+            </div>
         </div>
-    `;
+    `);
     
     // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        z-index: 10000;
-        max-width: 400px;
-        animation: slideInRight 0.3s ease-out;
-    `;
+    notification.css({
+        'position': 'fixed',
+        'top': '20px',
+        'right': '20px',
+        'background': type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6',
+        'color': 'white',
+        'padding': '1rem 1.5rem',
+        'border-radius': '10px',
+        'box-shadow': '0 10px 25px rgba(0, 0, 0, 0.2)',
+        'z-index': '10000',
+        'max-width': '400px',
+        'animation': 'slideInRight 0.3s ease-out'
+    });
     
     // Add to document
-    document.body.appendChild(notification);
+    $('body').append(notification);
     
     // Close button functionality
-    const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.addEventListener('click', () => {
-        notification.style.animation = 'slideOutRight 0.3s ease-out';
+    notification.find('.notification-close').on('click', function() {
+        notification.css('animation', 'slideOutRight 0.3s ease-out');
         setTimeout(() => notification.remove(), 300);
     });
     
     // Auto remove after 5 seconds
     setTimeout(() => {
-        if (notification.parentNode) {
-            notification.style.animation = 'slideOutRight 0.3s ease-out';
+        if (notification.length) {
+            notification.css('animation', 'slideOutRight 0.3s ease-out');
             setTimeout(() => notification.remove(), 300);
         }
     }, 5000);
 }
 
 // Add CSS animations for notifications
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
+$('<style>')
+    .prop('type', 'text/css')
+    .html(`
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
-        to {
-            transform: translateX(0);
-            opacity: 1;
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
         }
-    }
-    
-    @keyframes slideOutRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
         }
-    }
-    
-    .notification-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-    
-    .notification-close {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0;
-        line-height: 1;
-    }
-    
-    .notification-close:hover {
-        opacity: 0.8;
-    }
-`;
-document.head.appendChild(style);
+        
+        .notification-close:hover {
+            opacity: 0.8;
+        }
+    `)
+    .appendTo('head');
 
 // CV Download functionality
 function downloadCV() {
@@ -271,15 +259,16 @@ CERTIFICATIONS
 • Firebase Certified Developer
     `;
     
-    // Create and download file
+    // Create and download file using jQuery
     const blob = new Blob([cvContent], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Hor_Chanpheng_CV.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const link = $('<a>').attr({
+        'href': url,
+        'download': 'Hor_Chanpheng_CV.txt'
+    });
+    $('body').append(link);
+    link[0].click();
+    link.remove();
     window.URL.revokeObjectURL(url);
     
     showNotification('CV download started!', 'success');
@@ -302,9 +291,9 @@ function typeWriter(element, text, speed = 100) {
 }
 
 // Initialize typing animation when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
+$(document).ready(function() {
+    const heroTitle = $('.hero-title');
+    if (heroTitle.length) {
         setTimeout(() => {
             typeWriterKotlin(heroTitle, '', 100);
         }, 1000);
@@ -324,7 +313,7 @@ function typeWriterKotlin(element, text, speed = 100) {
     
     let currentPart = 0;
     let currentChar = 0;
-    element.innerHTML = '';
+    element.html('');
     
     function type() {
         if (currentPart < codeParts.length) {
@@ -333,9 +322,9 @@ function typeWriterKotlin(element, text, speed = 100) {
             if (currentChar < part.text.length) {
                 const char = part.text.charAt(currentChar);
                 if (part.class) {
-                    element.innerHTML += `<span class="${part.class}">${char}</span>`;
+                    element.append(`<span class="${part.class}">${char}</span>`);
                 } else {
-                    element.innerHTML += char;
+                    element.append(char);
                 }
                 currentChar++;
                 setTimeout(type, speed);
@@ -360,60 +349,53 @@ function typeWriterKotlin(element, text, speed = 100) {
 // });
 
 // Skill items animation on hover
-document.addEventListener('DOMContentLoaded', () => {
-    const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05) translateY(-2px)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1) translateY(0)';
-        });
-    });
+$(document).ready(function() {
+    $('.skill-item').hover(
+        function() {
+            $(this).css('transform', 'scale(1.05) translateY(-2px)');
+        },
+        function() {
+            $(this).css('transform', 'scale(1) translateY(0)');
+        }
+    );
 });
 
 // Project cards tilt effect
-document.addEventListener('DOMContentLoaded', () => {
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    projectCards.forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        });
+$(document).ready(function() {
+    $('.project-card').on('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-        });
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        $(this).css('transform', `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`);
+    });
+    
+    $('.project-card').on('mouseleave', function() {
+        $(this).css('transform', 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)');
     });
 });
 
 // Counter animation for stats
 function animateCounters() {
-    const counters = document.querySelectorAll('.stat h4');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.textContent);
+    $('.stat h4').each(function() {
+        const $counter = $(this);
+        const target = parseInt($counter.text());
         const increment = target / 100;
         let current = 0;
         
         const updateCounter = () => {
             if (current < target) {
                 current += increment;
-                counter.textContent = Math.ceil(current) + '+';
+                $counter.text(Math.ceil(current) + '+');
                 requestAnimationFrame(updateCounter);
             } else {
-                counter.textContent = target + '+';
+                $counter.text(target + '+');
             }
         };
         
@@ -431,28 +413,29 @@ const statsObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.5 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const statsSection = document.querySelector('.stats');
-    if (statsSection) {
-        statsObserver.observe(statsSection);
+$(document).ready(function() {
+    const statsSection = $('.stats');
+    if (statsSection.length) {
+        statsObserver.observe(statsSection[0]);
     }
 });
 
 // Add loading animation
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
+$(window).on('load', function() {
+    $('body').addClass('loaded');
 });
 
 // Add CSS for loading animation
-const loadingStyle = document.createElement('style');
-loadingStyle.textContent = `
-    body {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-    
-    body.loaded {
-        opacity: 1;
-    }
-`;
-document.head.appendChild(loadingStyle);
+$('<style>')
+    .prop('type', 'text/css')
+    .html(`
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+    `)
+    .appendTo('head');
