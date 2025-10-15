@@ -305,23 +305,45 @@ function typeWriter(element, text, speed = 100) {
 document.addEventListener('DOMContentLoaded', () => {
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
-        const originalText = heroTitle.innerHTML;
         setTimeout(() => {
-            typeWriterKotlin(heroTitle, originalText, 100);
+            typeWriterKotlin(heroTitle, '', 100);
         }, 1000);
     }
 });
 
 // Kotlin-style typing animation
 function typeWriterKotlin(element, text, speed = 100) {
-    let i = 0;
+    // Define the Kotlin code parts
+    const codeParts = [
+        { text: 'val', class: 'kotlin-keyword' },
+        { text: ' ', class: '' },
+        { text: 'developer', class: 'kotlin-variable' },
+        { text: ' = ', class: '' },
+        { text: '"Hor Chanpheng"', class: 'kotlin-string' }
+    ];
+    
+    let currentPart = 0;
+    let currentChar = 0;
     element.innerHTML = '';
     
     function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
+        if (currentPart < codeParts.length) {
+            const part = codeParts[currentPart];
+            
+            if (currentChar < part.text.length) {
+                const char = part.text.charAt(currentChar);
+                if (part.class) {
+                    element.innerHTML += `<span class="${part.class}">${char}</span>`;
+                } else {
+                    element.innerHTML += char;
+                }
+                currentChar++;
+                setTimeout(type, speed);
+            } else {
+                currentPart++;
+                currentChar = 0;
+                setTimeout(type, speed);
+            }
         }
     }
     
