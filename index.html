@@ -30,6 +30,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- SVG Filter for Advanced Glass Effect -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <filter id="switcher">
+                <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="1"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+            </filter>
+        </defs>
+    </svg>
 </head>
 <body>
     <!-- Navigation -->
@@ -56,7 +66,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link download-cv" onclick="downloadCV()">
-                        <i class="fas fa-download"></i> Download CV
+                        <i class="fas fa-download"></i> <span>Download CV</span>
                     </a>
                 </li>
             </ul>
@@ -82,8 +92,8 @@
                         that deliver exceptional user experiences. Specializing in Kotlin, Java, and modern Android development practices.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        <a href="#projects" class="btn btn-primary"><span>View My Work</span></a>
+                        <a href="#contact" class="btn btn-secondary"><span>Get In Touch</span></a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -347,7 +357,7 @@
                         <div class="form-group">
                             <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary"><span>Send Message</span></button>
                     </form>
                 </div>
             </div>

@@ -25,15 +25,9 @@ $('a[href^="#"]').on('click', function(e) {
 $(window).on('scroll', function() {
     const navbar = $('.navbar');
     if ($(window).scrollTop() > 50) {
-        navbar.css({
-            'background': 'rgba(255, 255, 255, 0.98)',
-            'box-shadow': '0 2px 20px rgba(0, 0, 0, 0.1)'
-        });
+        navbar.addClass('scrolled');
     } else {
-        navbar.css({
-            'background': 'rgba(255, 255, 255, 0.95)',
-            'box-shadow': 'none'
-        });
+        navbar.removeClass('scrolled');
     }
 });
 

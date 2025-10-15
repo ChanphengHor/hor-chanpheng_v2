@@ -1,3 +1,31 @@
+/* CSS Variables for Advanced Liquid Glass Theme */
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --accent-color: #45b7d1;
+    --text-color: #ffffff;
+    --text-secondary: #b0b0b0;
+    --bg-color: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+    --backdrop-blur: blur(20px);
+    
+    /* Advanced Glass Effect Variables */
+    --c-glass: #bbbbbc;
+    --c-light: #fff;
+    --c-dark: #000;
+    --c-content: #e1e1e1;
+    --c-action: #03d5ff;
+    --c-bg: #1b1b1d;
+    --glass-reflex-dark: 2;
+    --glass-reflex-light: 0.3;
+    --saturation: 150%;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -12,8 +40,12 @@ html {
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #ffffff;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
 }
 
 .container {
@@ -27,11 +59,18 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
     z-index: 9999;
     transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-container {
@@ -45,9 +84,10 @@ body {
 }
 
 .nav-logo h2 {
-    color: #4f46e5;
+    color: var(--primary-color);
     font-weight: 700;
     font-size: 1.5rem;
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
 }
 
 .nav-menu {
@@ -59,14 +99,18 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: var(--text-color);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
 }
 
 .nav-link:hover {
-    color: #4f46e5;
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
 }
 
 .nav-link::after {
@@ -75,26 +119,87 @@ body {
     width: 0;
     height: 2px;
     bottom: -5px;
-    left: 0;
-    background-color: #4f46e5;
-    transition: width 0.3s ease;
+    left: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
 }
 
 .nav-link:hover::after {
-    width: 100%;
+    width: 80%;
+}
+
+.nav-link.active {
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link.active::after {
+    width: 80%;
 }
 
 .download-cv {
-    background: #4f46e5;
-    color: white !important;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 8px 16px;
     border-radius: 25px;
-    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--c-content) !important;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 .download-cv:hover {
-    background: #3730a3;
-    transform: translateY(-2px);
+    --c-content: var(--c-action);
+    transform: translateY(-1px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
+}
+
+.download-cv span {
+    position: relative;
+    z-index: 3;
+    color: inherit !important;
+    font-weight: 600;
+    transition: color 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 .download-cv::after {
@@ -110,9 +215,10 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #333;
+    background-color: var(--text-color);
     margin: 3px 0;
     transition: 0.3s;
+    border-radius: 2px;
 }
 
 /* Hero Section */
@@ -120,8 +226,8 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--bg-color);
+    color: var(--text-color);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -134,8 +240,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
-    background-size: cover;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(78, 205, 196, 0.15) 0%, transparent 50%);
     z-index: -1;
 }
 
@@ -156,17 +264,17 @@ body {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 1rem 1.5rem;
-    border-radius: 10px;
-    border-left: 4px solid #fbbf24;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: var(--glass-bg);
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--backdrop-blur);
+    box-shadow: var(--shadow);
     animation: codeGlow 3s ease-in-out infinite alternate;
     white-space: nowrap;
     overflow-x: auto;
@@ -174,6 +282,7 @@ body {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    position: relative;
 }
 
 .hero-title::-webkit-scrollbar {
@@ -182,45 +291,45 @@ body {
 
 @keyframes codeGlow {
     0% {
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        border-left-color: #fbbf24;
+        box-shadow: var(--shadow);
+        border-color: var(--glass-border);
     }
     100% {
-        box-shadow: 0 8px 32px rgba(251, 191, 36, 0.2);
-        border-left-color: #f59e0b;
+        box-shadow: var(--shadow-hover), 0 0 30px rgba(255, 107, 107, 0.3);
+        border-color: var(--primary-color);
     }
 }
 
 .highlight {
-    color: #fbbf24;
+    color: var(--primary-color);
 }
 
 /* Kotlin Syntax Highlighting */
 .kotlin-keyword {
-    color: #4fc3f7;
+    color: var(--primary-color);
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(79, 195, 247, 0.3);
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
 }
 
 .kotlin-variable {
-    color: #81c784;
+    color: var(--text-color);
     font-weight: 500;
-    text-shadow: 0 0 10px rgba(129, 199, 132, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .kotlin-string {
-    color: #ffb74d;
+    color: var(--secondary-color);
     font-weight: 500;
-    text-shadow: 0 0 10px rgba(255, 183, 77, 0.3);
+    text-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
 }
 
 /* Code typing effect */
 .hero-title::after {
     content: '|';
-    color: #fbbf24;
+    color: var(--primary-color);
     animation: blink 1s infinite;
     margin-left: 2px;
-    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
     font-weight: bold;
 }
 
@@ -230,16 +339,16 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
-    color: #e5e7eb;
+    color: var(--text-color);
 }
 
 .hero-description {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: #d1d5db;
+    color: var(--text-secondary);
     line-height: 1.7;
 }
 
@@ -249,46 +358,120 @@ body {
 }
 
 .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 12px 24px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-block;
-    border: 2px solid transparent;
+    font-size: 1rem;
+    color: var(--c-content);
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
-.btn-primary {
-    background: #fbbf24;
-    color: #1f2937;
-}
-
-.btn-primary:hover {
-    background: #f59e0b;
+.btn:hover {
+    --c-content: var(--c-action);
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
-.btn-secondary {
-    background: transparent;
-    color: white;
-    border-color: white;
-}
-
-.btn-secondary:hover {
-    background: white;
-    color: #4f46e5;
-    transform: translateY(-2px);
+/* Button Text Layer */
+.btn span {
+    position: relative;
+    z-index: 3;
+    font-size: 1rem;
+    color: inherit;
+    font-weight: 600;
+    transition: color 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 .profile-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem;
+    border-radius: 20px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
 .profile-image img {
@@ -340,6 +523,7 @@ section {
     padding: 80px 0;
     position: relative;
     overflow: hidden;
+    background: var(--bg-secondary);
 }
 
 .section-header {
@@ -350,18 +534,18 @@ section {
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--text-color);
     margin-bottom: 1rem;
 }
 
 .section-subtitle {
     font-size: 1.2rem;
-    color: #6b7280;
+    color: var(--text-secondary);
 }
 
 /* About Section */
 .about {
-    background: #f9fafb;
+    background: var(--bg-color);
     position: relative;
     z-index: 2;
     margin-top: 0;
@@ -376,13 +560,13 @@ section {
 
 .about-text h3 {
     font-size: 1.8rem;
-    color: #1f2937;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
 }
 
 .about-text p {
     font-size: 1.1rem;
-    color: #4b5563;
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
     line-height: 1.7;
 }
@@ -395,22 +579,69 @@ section {
 }
 
 .stat {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     padding: 1.5rem;
-    background: white;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
+}
+
+.stat:hover {
+    transform: translateY(-3px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
 .stat h4 {
+    position: relative;
+    z-index: 3;
     font-size: 2rem;
-    color: #4f46e5;
+    color: var(--primary-color);
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
 .stat p {
-    color: #6b7280;
+    position: relative;
+    z-index: 3;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
@@ -450,22 +681,63 @@ section {
 }
 
 .skill-category {
-    background: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 .skill-category:hover {
     transform: translateY(-5px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
 .skill-category h3 {
+    position: relative;
+    z-index: 3;
     font-size: 1.3rem;
-    color: #1f2937;
+    color: var(--c-content);
     margin-bottom: 1.5rem;
     text-align: center;
+    font-weight: 600;
 }
 
 .skill-items {
@@ -475,33 +747,70 @@ section {
 }
 
 .skill-item {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem;
-    background: #f9fafb;
     border-radius: 10px;
-    transition: all 0.3s ease;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    cursor: pointer;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 .skill-item:hover {
-    background: #4f46e5;
-    color: white;
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-2px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
 .skill-item i {
+    position: relative;
+    z-index: 3;
     font-size: 1.2rem;
-    color: #4f46e5;
+    color: var(--primary-color);
 }
 
 .skill-item:hover i {
-    color: white;
+    color: var(--primary-color);
 }
 
 /* Projects Section */
 .projects {
-    background: #f9fafb;
+    background: var(--bg-color);
     position: relative;
     z-index: 2;
 }
@@ -513,15 +822,51 @@ section {
 }
 
 .project-card {
-    background: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 .project-card:hover {
     transform: translateY(-10px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
 .project-image {
@@ -546,13 +891,14 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(79, 70, 229, 0.9);
+    background: rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 2;
 }
 
 .project-card:hover .project-overlay {
@@ -562,18 +908,24 @@ section {
 .project-link {
     width: 50px;
     height: 50px;
-    background: white;
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4f46e5;
+    color: var(--text-color);
     text-decoration: none;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
 }
 
 .project-link:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--bg-color);
     transform: scale(1.1);
+    box-shadow: var(--shadow-hover);
 }
 
 .project-content {
@@ -582,12 +934,12 @@ section {
 
 .project-content h3 {
     font-size: 1.3rem;
-    color: #1f2937;
+    color: var(--text-color);
     margin-bottom: 1rem;
 }
 
 .project-content p {
-    color: #6b7280;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
     line-height: 1.6;
 }
@@ -599,12 +951,54 @@ section {
 }
 
 .tech-tag {
-    background: #e0e7ff;
-    color: #4f46e5;
+    position: relative;
+    display: inline-block;
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     font-size: 0.8rem;
     font-weight: 500;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    color: var(--primary-color);
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 3px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent),
+        0px 4px 12px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 6%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
+}
+
+.tech-tag:hover {
+    transform: scale(1.05) translateY(-1px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 6px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
 }
 
 /* Contact Section */
@@ -620,12 +1014,12 @@ section {
 
 .contact-info h3 {
     font-size: 1.8rem;
-    color: #1f2937;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
 }
 
 .contact-info p {
-    color: #6b7280;
+    color: var(--text-secondary);
     margin-bottom: 2rem;
     line-height: 1.7;
 }
@@ -642,32 +1036,115 @@ section {
 }
 
 .contact-method i {
+    position: relative;
     width: 50px;
     height: 50px;
-    background: #4f46e5;
-    color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    color: var(--primary-color);
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
+}
+
+.contact-method:hover i {
+    transform: scale(1.1) translateY(-2px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
 .contact-method h4 {
-    color: #1f2937;
+    color: var(--text-color);
     margin-bottom: 0.25rem;
 }
 
 .contact-method p {
-    color: #6b7280;
+    color: var(--text-secondary);
     margin: 0;
 }
 
 .contact-form {
-    background: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
+}
+
+.contact-form:hover {
+    transform: translateY(-2px);
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 95%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 85%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 65%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 25%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 2px 8px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        0px 8px 20px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent);
 }
 
 .form-group {
@@ -676,19 +1153,56 @@ section {
 
 .form-group input,
 .form-group textarea {
+    position: relative;
     width: 100%;
     padding: 1rem;
-    border: 2px solid #e5e7eb;
     border-radius: 10px;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
     font-family: inherit;
+    overflow: hidden;
+    isolation: isolate;
+    box-sizing: border-box;
+    
+    /* Advanced Glass Background */
+    background-color: color-mix(in srgb, var(--c-glass) 8%, transparent);
+    backdrop-filter: blur(8px) url(#switcher) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    color: var(--c-content);
+    
+    /* Complex Glass Shadows */
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 8%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 70%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 50%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent),
+        0px 1px 3px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent),
+        0px 4px 12px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 6%), transparent);
+    
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+                box-shadow 400ms cubic-bezier(1, 0, 0.4, 1),
+                transform 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #4f46e5;
+    background-color: color-mix(in srgb, var(--c-glass) 15%, transparent);
+    box-shadow: 
+        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 15%), transparent),
+        inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+        inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+        inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+        inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 15%), transparent),
+        inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+        inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        0px 2px 6px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+        0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    transform: translateY(-1px);
 }
 
 .form-group textarea {
@@ -698,9 +1212,10 @@ section {
 
 /* Footer */
 .footer {
-    background: #1f2937;
-    color: white;
+    background: var(--bg-color);
+    color: var(--text-color);
     padding: 2rem 0;
+    border-top: 1px solid var(--glass-border);
 }
 
 .footer-content {
@@ -804,7 +1319,7 @@ section {
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
     
     .profile-card {
@@ -825,8 +1340,9 @@ section {
     }
     
     .hero-title {
-        font-size: 2rem;
-        margin: 0 auto;
+        font-size: 1.3rem;
+        margin: 0;
+        text-align: left;
     }
     
     .hero-text {
@@ -848,7 +1364,8 @@ section {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: white;
+        background: var(--glass-bg);
+        backdrop-filter: var(--backdrop-blur);
         width: 100%;
         text-align: center;
         transition: 0.3s;
@@ -873,12 +1390,13 @@ section {
     }
     
     .hero-title {
-        font-size: 1.8rem;
-        padding: 0.8rem 1rem;
+        font-size: 1.1rem;
+        padding: 0.6rem 0.8rem;
         white-space: nowrap;
         overflow-x: auto;
-        margin: 0 auto;
+        margin: 0;
         max-width: 90%;
+        text-align: left;
     }
     
     .hero-buttons {
@@ -945,14 +1463,15 @@ section {
     }
     
     .hero-title {
-        font-size: 1.2rem;
-        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+        padding: 0.5rem 0.7rem;
         white-space: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
         max-width: 95%;
-        margin: 0 auto;
+        margin: 0;
+        text-align: left;
     }
     
     .hero-subtitle {
