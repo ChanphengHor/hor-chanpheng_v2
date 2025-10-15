@@ -159,10 +159,63 @@ body {
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #fbbf24;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: codeGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes codeGlow {
+    0% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border-left-color: #fbbf24;
+    }
+    100% {
+        box-shadow: 0 8px 32px rgba(251, 191, 36, 0.2);
+        border-left-color: #f59e0b;
+    }
 }
 
 .highlight {
     color: #fbbf24;
+}
+
+/* Kotlin Syntax Highlighting */
+.kotlin-keyword {
+    color: #4fc3f7;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(79, 195, 247, 0.3);
+}
+
+.kotlin-variable {
+    color: #81c784;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(129, 199, 132, 0.3);
+}
+
+.kotlin-string {
+    color: #ffb74d;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(255, 183, 77, 0.3);
+}
+
+/* Code typing effect */
+.hero-title::after {
+    content: '|';
+    color: #fbbf24;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 .hero-subtitle {
@@ -767,7 +820,8 @@ section {
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        padding: 0.8rem 1rem;
     }
     
     .hero-buttons {
@@ -820,7 +874,8 @@ section {
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        padding: 0.6rem 0.8rem;
     }
     
     .section-title {

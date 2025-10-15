@@ -307,10 +307,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroTitle) {
         const originalText = heroTitle.innerHTML;
         setTimeout(() => {
-            typeWriter(heroTitle, originalText, 50);
+            typeWriterKotlin(heroTitle, originalText, 100);
         }, 1000);
     }
 });
+
+// Kotlin-style typing animation
+function typeWriterKotlin(element, text, speed = 100) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    
+    type();
+}
 
 // Parallax effect for hero section (disabled to prevent overlap issues)
 // window.addEventListener('scroll', () => {
