@@ -38,15 +38,28 @@ A modern, responsive portfolio website showcasing Android development skills and
 ### Local Development
 
 1. Clone or download this repository
-2. Open `index.html` in your web browser
-3. Or use a local server:
+2. Navigate to the project directory:
    ```bash
-   # Using Python
-   python -m http.server 8000
+   cd "/Users/jjanpaeng/Documents/My Documents/Project_Documents/Documents/Firebase/hor_chanpheng_v2"
+   ```
+3. Start a local server:
+   ```bash
+   # Using Python 3 (Recommended)
+   python3 -m http.server 8000
+   
+   # Using Python 2 (if Python 3 not available)
+   python -m SimpleHTTPServer 8000
    
    # Using Node.js
-   npx serve .
+   npx http-server -p 8000
+   
+   # Using PHP
+   php -S localhost:8000
    ```
+4. Open your browser and go to: **http://localhost:8000**
+5. To stop the server: Press `Ctrl + C` in the terminal
+
+**Note**: Using a local server is recommended over opening `index.html` directly in the browser to ensure proper loading of assets and background images.
 
 ### Firebase Hosting Deployment
 
