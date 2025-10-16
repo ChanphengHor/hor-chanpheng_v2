@@ -201,20 +201,38 @@ body::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 80px;
 }
 
-.nav-logo h2 {
-    color: var(--primary-color);
-    font-weight: 700;
-    font-size: 1.5rem;
-    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+.nav-logo {
+    display: flex;
+    align-items: center;
 }
+
+.nav-logo .hero-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    line-height: 1.2;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    max-width: 500px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Removed h2 styling since Hor Chanpheng text was removed from navbar */
 
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
 }
 
@@ -384,27 +402,7 @@ body::before {
     min-height: 80vh;
 }
 
-.hero-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-    background: var(--glass-bg);
-    padding: 0.8rem 1.2rem;
-    border-radius: 12px;
-    border: 1px solid var(--glass-border);
-    backdrop-filter: var(--backdrop-blur);
-    box-shadow: var(--shadow);
-    animation: codeGlow 3s ease-in-out infinite alternate;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    position: relative;
-}
+/* Hero title styles moved to navbar */
 
 .hero-title::-webkit-scrollbar {
     display: none;
@@ -447,11 +445,11 @@ body::before {
 /* Code typing effect */
 .hero-title::after {
     content: '|';
-    color: var(--primary-color);
+    color: var(--text-secondary);
     animation: blink 1s infinite;
     margin-left: 2px;
-    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-    font-weight: bold;
+    font-weight: normal;
+    opacity: 0.7;
 }
 
 @keyframes blink {
@@ -1439,9 +1437,7 @@ section {
         gap: 2rem;
     }
     
-    .hero-title {
-        font-size: 1.5rem;
-    }
+    /* Hero title styles moved to navbar */
     
     .profile-card {
         padding: 1.5rem;
@@ -1460,11 +1456,7 @@ section {
         gap: 2rem;
     }
     
-    .hero-title {
-        font-size: 1.3rem;
-        margin: 0;
-        text-align: left;
-    }
+    /* Hero title styles moved to navbar */
     
     .hero-text {
         order: 1;
@@ -1480,10 +1472,15 @@ section {
         display: flex;
     }
     
+    .nav-logo .hero-title {
+        font-size: 1rem;
+        max-width: 400px;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 80px;
         flex-direction: column;
         background: var(--glass-bg);
         backdrop-filter: var(--backdrop-blur);
@@ -1510,15 +1507,7 @@ section {
         padding: 2rem 0;
     }
     
-    .hero-title {
-        font-size: 1.1rem;
-        padding: 0.6rem 0.8rem;
-        white-space: nowrap;
-        overflow-x: auto;
-        margin: 0;
-        max-width: 90%;
-        text-align: left;
-    }
+    /* Hero title styles moved to navbar */
     
     .hero-buttons {
         justify-content: center;
@@ -1574,6 +1563,11 @@ section {
         padding: 0 15px;
     }
     
+    .nav-logo .hero-title {
+        font-size: 0.9rem;
+        max-width: 350px;
+    }
+    
     .hero {
         padding: 1rem 0;
     }
@@ -1583,17 +1577,7 @@ section {
         padding: 1rem 0;
     }
     
-    .hero-title {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.7rem;
-        white-space: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        max-width: 95%;
-        margin: 0;
-        text-align: left;
-    }
+    /* Hero title styles moved to navbar */
     
     .hero-subtitle {
         font-size: 1.2rem;
