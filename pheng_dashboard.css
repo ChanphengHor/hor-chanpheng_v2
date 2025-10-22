@@ -125,6 +125,7 @@ body {
   margin-bottom: -1px;
   margin-top: 6px;
   transition: transform 0.2s ease-out;
+  position: relative;
 
   img {
     width: 78px;
@@ -137,6 +138,49 @@ body {
   &:active {
     transform: scale(0.95);
   }
+}
+
+/* Tooltip styles positioned outside docker-container */
+.glass-content__link::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  color: black;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10001;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.glass-content__link::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(255, 255, 255, 0.95);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10001;
+  pointer-events: none;
+}
+
+.glass-content__link:hover::before,
+.glass-content__link:hover::after {
+  opacity: 1;
+  visibility: visible;
 }
 
 .player {
@@ -246,6 +290,13 @@ body {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   will-change: transform;
   backface-visibility: hidden;
+  /* Allow tooltips to show outside */
+  overflow: visible;
+}
+
+/* Allow tooltips to show outside the glass container in docker */
+#docker-container .glass-container {
+  overflow: visible;
 }
 
 .padding-0{
