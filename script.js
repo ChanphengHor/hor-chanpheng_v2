@@ -1,3 +1,39 @@
+// Starter Section Auto-hide Effect
+$(document).ready(function() {
+    // Ensure starter section exists before setting up timer
+    if ($('#starter').length > 0) {
+        console.log('Starter section found, setting up 10-second timer');
+        
+        // Make sure body is visible when starter section is present
+        $('body').css('opacity', '1');
+        
+        // Hide starter section after 10 seconds
+        setTimeout(function() {
+            console.log('10 seconds elapsed, fading out starter section');
+            $('#starter').fadeOut(500, function() {
+                console.log('Starter section removed');
+                $(this).remove();
+                // Now add loaded class to body for smooth transition
+                $('body').addClass('loaded');
+            });
+        }, 500);
+        
+        // Add click to skip starter section
+        $('#starter').on('click', function() {
+            console.log('Starter section clicked, fading out immediately');
+            $(this).fadeOut(500, function() {
+                $(this).remove();
+                // Now add loaded class to body for smooth transition
+                $('body').addClass('loaded');
+            });
+        });
+    } else {
+        console.log('Starter section not found');
+        // If no starter section, immediately show body
+        $('body').addClass('loaded');
+    }
+});
+
 // Mobile Navigation Toggle
 $('.hamburger').on('click', function() {
     $(this).toggleClass('active');
@@ -414,12 +450,15 @@ $(document).ready(function() {
     }
 });
 
-// Add loading animation
+// Add loading animation (modified for starter section)
 $(window).on('load', function() {
-    $('body').addClass('loaded');
+    // Only add loaded class if starter section doesn't exist
+    if ($('#starter').length === 0) {
+        $('body').addClass('loaded');
+    }
 });
 
-// Add CSS for loading animation
+// Add CSS for loading animation (modified for starter section)
 $('<style>')
     .prop('type', 'text/css')
     .html(`
@@ -430,6 +469,12 @@ $('<style>')
         
         body.loaded {
             opacity: 1;
+        }
+        
+        /* Ensure starter section is always visible */
+        #starter {
+            opacity: 1 !important;
+            visibility: visible !important;
         }
     `)
     .appendTo('head');

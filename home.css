@@ -1,16 +1,13 @@
 /* LIQUID GLASS STYLES */
-/* https://css-tricks.com/getting-clarity-on-apples-liquid-glass/ */
+
 .liquidGlass-wrapper {
     position: relative;
     display: flex;
     font-weight: 600;
     overflow: hidden;
-  
     color: black;
     cursor: pointer;
-  
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
-  
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   }
   
@@ -18,7 +15,6 @@
     position: absolute;
     z-index: 0;
     inset: 0;
-  
     backdrop-filter: blur(3px);
     filter: url(#glass-distortion);
     overflow: hidden;
@@ -58,9 +54,9 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url("https://www.publicdomainpictures.net/pictures/610000/velka/seamless-floral-wallpaper-art-1715193626Gct.jpg")
-      center;
-    background-size: 500px;
+    background: url("test_bg_8.png")
+      center center;
+    background-size: cover;
     font-family: sans-serif;
     font-weight: 300;
   
@@ -182,13 +178,4 @@
   
   .button:hover svg {
     transform: scale(0.95);
-  }
-  
-  @keyframes moveBackground {
-    from {
-      background-position: 0% 0%;
-    }
-    to {
-      background-position: 0% -500%;
-    }
   }
