@@ -159,7 +159,9 @@ body {
   transition: all 0.3s ease;
   z-index: 10001;
   pointer-events: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); */
+  border: none;
+  outline: none;
 }
 
 .glass-content__link::after {
@@ -168,7 +170,7 @@ body {
   bottom: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  border: 5px solid transparent;
+  border: 6px solid transparent;
   border-top-color: rgba(255, 255, 255, 0.95);
   opacity: 0;
   visibility: hidden;
@@ -271,8 +273,6 @@ body {
 .glass-item--active svg {
   fill: var(--lg-red);
 }
-
-
 
 
 #docker-container {
